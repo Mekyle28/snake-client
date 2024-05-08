@@ -20,6 +20,10 @@ const connect = function () {
       console.log("you are connected! happy hunting :)")
     });
   
+    conn.on("connect", () => {
+        conn.write("Name: MAC");
+    });
+    
     return conn;
   };
 
