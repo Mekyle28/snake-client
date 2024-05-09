@@ -1,6 +1,7 @@
 
 const net = require("net");
 
+
 const connect = function () {
     const conn = net.createConnection({
       host: "localhost",
@@ -20,10 +21,11 @@ const connect = function () {
       console.log("you are connected! happy hunting :)")
     });
   
+    //when server connection is established snake name (three letter) is sent to server
     conn.on("connect", () => {
-        conn.write("Name: MAC");
+        conn.write("Name: MAC");     
     });
-    
+
     return conn;
   };
 
