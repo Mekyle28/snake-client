@@ -2,29 +2,25 @@ const net = require("net");
 const connect = require('./client')
 
 
-// // establishes a connection with the game server
-// const connect = function () {
-//   const conn = net.createConnection({
-//     host: "localhost",
-//     port: 50541
-//   });
-
-//   // interpret incoming data as text
-//   conn.setEncoding("utf8");
-
-//   // data event listener, console.logs any data the server sends.
-//   conn.on("data", (data) => {
-//     console.log("Server says: ", data);
-//   });
-
-//   // a callback that runs once a conection has been established
-//   conn.on("connect", () => {
-//     console.log("you are connected! happy hunting :)")
-//   });
-
-//   return conn;
-// };
-
 console.log("Connecting ...");
 connect();
 
+const handleUserInput = (key) => {
+// \u0003 maps to ctrl+c input
+if (key === "\u0003") {
+    process.exit();
+  };
+};
+
+// setup interface to handle user input from stdin
+const setupInput = function () {
+    const stdin = process.stdin;
+    stdin.setRawMode(true);
+    stdin.setEncoding("utf8");
+    stdin.resume();
+    stdin.on("data", handleUserInput);
+    return stdin;
+  };
+
+
+ setupInput("data")
